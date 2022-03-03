@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1646274434 source:d:\users\emast\c++ projects\text2morse\main.cpp
+	<iostream>
+	<string>
+	<windows.h>
+	"morse.h"
+
+1646270726 d:\users\emast\c++ projects\text2morse\include\morse.h
+	<map>
+
+1646274659 source:d:\users\emast\c++ projects\text2morse\src\morse.cpp
+	<iostream>
+	<string>
+	<windows.h>
+	<map>
+	"morse.h"
+
