@@ -1,20 +1,21 @@
 #include <iostream>
 #include <string>
 #include <windows.h> // WinApi header
+#include <mmsystem.h>
 #include "morse.h"
 
 
 int main()
 {
-
-    morse m(200);
+    morse m;
 
     std::cout << "Enter a string: " ;
     std::string s ;
-    getline (std::cin, s);
-    std::cout << "Your string was:" << s << "\n";
+    getline(std::cin, s);
+
     // play code
     m.play_string(s);
+
 
     return 0;
 }

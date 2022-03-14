@@ -2,15 +2,13 @@
 #include <string>
 #include <windows.h> // WinApi header
 #include <map>
+#include <mmsystem.h>
 #include "morse.h"
 
 
-morse::morse(int t)
+morse::morse()
 {
     //ctor
-
-    // set the base unit time
-    this->u_time = t;
 
     // create the map relating characters
     // dits are = 0
@@ -97,7 +95,16 @@ morse::morse(int t)
 
     m[' '] = "-------";
 
-
+    m['1'] = "0-1-1-1-1";
+    m['2'] = "0-0-1-1-1";
+    m['3'] = "0-0-0-1-1";
+    m['4'] = "0-0-0-0-1";
+    m['5'] = "0-0-0-0-0";
+    m['6'] = "1-0-0-0-0";
+    m['7'] = "1-1-0-0-0";
+    m['8'] = "1-1-1-0-0";
+    m['9'] = "1-1-1-1-0";
+    m['0'] = "1-1-1-1-1";
 }
 
 morse::~morse()
@@ -106,33 +113,35 @@ morse::~morse()
 }
 
 
-int morse::get_u_time()
-{
-    return morse::u_time;
-}
 
 void morse::play_letter(char c)
 {
 
     std::string s = m[c];
-    std::cout << "Playing the letter " << s << "\n";
-
-    for(unsigned int i = 0; i < s.length(); i++)
-    {
-        if(s[i] == '0')
-        {
-            Beep(freq, u_time);
-        }
-        else if(s[i] == '1')
-        {
-            Beep(freq, 3*u_time);
-        }
-        else
-        {
-            Sleep(u_time);
-        }
-
+//    std::cout << "Playing the letter " << c << "\n";
+    if(c == ' '){
+        PlaySound(TEXT("space.wav"), NULL, SND_FILENAME | SND_SYNC);
     }
+    else{
+        for(unsigned int i = 0; i < s.length(); i++)
+        {
+            if(s[i] == '0')
+            {
+                PlaySound(TEXT("dit.wav"), NULL, SND_FILENAME | SND_SYNC);
+            }
+            else if(s[i] == '1')
+            {
+                PlaySound(TEXT("dah.wav"), NULL, SND_FILENAME | SND_SYNC);
+            }
+            else
+            {
+                PlaySound(TEXT("dit_silence.wav"), NULL, SND_FILENAME | SND_SYNC);
+            }
+
+        }
+    }
+
+
 }
 
 
@@ -142,6 +151,5 @@ void morse::play_string(std::string str)
     for(unsigned int i = 0; i < str.length(); i++)
     {
         play_letter(str[i]);
-        Sleep(3*u_time);
     }
 }

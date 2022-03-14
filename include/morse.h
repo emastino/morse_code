@@ -5,9 +5,8 @@
 class morse
 {
     public:
-        morse(int); // constructor
+        morse(); // constructor
         virtual ~morse(); // deconstructor
-        int get_u_time();
         void play_letter(char);
         void play_string(std::string);
 
@@ -15,8 +14,7 @@ class morse
         std::map<char, std::string> m;
 
     private:
-        int u_time; // time of  a unit in ms
-        int freq = 440;
+
 };
 
 #endif // MORSE_H
